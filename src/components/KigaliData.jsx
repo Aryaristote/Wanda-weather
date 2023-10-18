@@ -44,6 +44,19 @@ const KigaliData = () => {
         }
     }, [_kigaliData]);
 
+    //Change image with weather
+    const getWeatherImage = (temperature) => {
+        if (temperature > 30) {
+            return "projcard-img"; // Icon for hot and sunny weather
+        } else if (temperature > 20) {
+            return "cloud-img"; 
+        } else if (temperature > 10) {
+            return "wind-img";
+        } else {
+            return "rain-img"; 
+        }
+    };
+
     
     return (
         <>
