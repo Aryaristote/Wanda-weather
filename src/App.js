@@ -1,9 +1,8 @@
 import "./App.css"; 
-import React, { useState, useEffect } from 'react';
 import Navigations from "./components/Navigation"; 
+import React, { useState, useEffect } from 'react';
 import darkImage from './assets/images/back-dark-mode.jpg'; 
 import lightImage from './assets/images/back-light-mode.png';
-
 
 const App = () => {
   const [theme, setTheme] = useState('light');
@@ -25,11 +24,8 @@ const App = () => {
     }
   }, []);
 
-  const imageSource = theme === 'light' ? lightImage : darkImage;
-
   return (
     <div className={`App ${theme}`}>
-      <img src={imageSource} alt="Snow" className="mainImg" />
       <Navigations theme={theme} toggleTheme={toggleTheme} />
     </div>
   );
