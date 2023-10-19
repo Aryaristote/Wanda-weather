@@ -5,8 +5,6 @@ import React, { useState, useEffect } from 'react';
 import WeatherCards from "../components/WeatherCards"
 
 const Welcome = ({ theme, toggleTheme }) => {
-  const [country, setCountry] = useState('');
-  const [city, setCity] = useState('');
   const [data, setData] = useState('');
   const [loading, setLoading] = useState(true)
 

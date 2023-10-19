@@ -1,4 +1,5 @@
 import "./App.css"; 
+import axios from 'axios';
 import Navigations from "./components/Navigation"; 
 import React, { useState, useEffect } from 'react';
 
@@ -19,6 +20,18 @@ const App = () => {
     } else {
       setTheme('dark'); 
     }
+  }, []);
+
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    axios.get('http://localhost:3011/user')
+      .then((response) => {
+        setUserData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error);
+      });
   }, []);
 
   return (
