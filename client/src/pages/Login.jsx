@@ -46,6 +46,7 @@ const Login = () => {
                     <p onClick={() => setIsRegistration(!isRegistration)}>
                         {isRegistration ? 'Already have an account? Login' : 'Don\'t have an account? Register'}
                     </p>
+                    <p><a href="/">Home</a></p>
                     </form>
                 </div>
                 
