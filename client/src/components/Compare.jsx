@@ -7,43 +7,29 @@ const Compare = () => {
   const [weatherData2, setWeatherData2] = useState(null);
   const [result, setResult] = useState('');
 
-  const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
+  const apiKey = '80a1eb863f7255c20882855ea4f6f309';
 
-  const fetchWeatherData = async (city, setDataFunction) => {
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
-      );
-      const data = await response.json();
-      setDataFunction(data);
-    } catch (error) {
-      console.error('Error fetching weather data:', error);
-      setDataFunction(null);
-    }
-  };
-
-  const compareCities = async () => {
-    setWeatherData1(null);
-    setWeatherData2(null);
-    setResult('Fetching weather data...');
-
-    const promises = [
-      fetchWeatherData(city1, setWeatherData1),
-      fetchWeatherData(city2, setWeatherData2),
-    ];
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
-      await Promise.all(promises);
+      const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city1}&appid=${apiKey}`);
+      const data1 = await response1.json();
 
-      if (!weatherData1 || !weatherData2) {
-        setResult('Error fetching weather data.');
+      const response2 = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city2}&appid=${apiKey}`);
+      const data2 = await response2.json();
+
+      if (data1.cod === '404' || data2.cod === '404') {
+        setResult('One or both cities not found.');
         return;
       }
+      setWeatherData1(data1);
+      setWeatherData2(data2);
 
       // Compare the weather data here and set the result accordingly
-      if (weatherData1.main.temp > weatherData2.main.temp) {
+      if (data1.main.temp > data2.main.temp) {
         setResult(`${city1} is hotter than ${city2}.`);
-      } else if (weatherData1.main.temp < weatherData2.main.temp) {
+      } else if (data1.main.temp < data2.main.temp) {
         setResult(`${city2} is hotter than ${city1}.`);
       } else {
         setResult(`${city1} and ${city2} have the same temperature.`);
@@ -54,17 +40,11 @@ const Compare = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    compareCities();
-  };
-
   return (
     <div className="comp-cards">
       <div className="card-content">
         <div className="respont-card">
-          Block response:
-          <p>{result}</p>
+          {result && <p>{result}</p>}
         </div>
         <form className="all-input" onSubmit={handleSubmit}>
           <div className="all-input">
@@ -77,7 +57,7 @@ const Compare = () => {
               <input name="right" type="text" value={city2} onChange={(e) => setCity2(e.target.value)} className="input-card" placeholder="City Two" />
             </div>
           </div>
-          <button type="submit" onClick={compareCities}>Compare</button>
+          <button type="submit">Compare</button>
         </form>
       </div>
     </div>

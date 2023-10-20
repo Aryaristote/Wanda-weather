@@ -609,7 +609,10 @@
 }
 .light .comp-cards .card-content .respont-card {
   background-color: var(--dark);
-  color: white;
+  color: var(--dark);
+}
+.dark .comp-cards .card-content .respont-card {
+  color: var(--dark);
 }
 .comp-cards .card-content form{
   display: flex;
@@ -672,7 +675,7 @@
 }
 
 /* Login form  */
-.light .login {
+.login {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -682,11 +685,11 @@
 
 .login .inner {
   position: relative;
-  width: 435px;
+  width: 400px;
 }
 
 .login .inner form {
-  width: 90%;
+  width: 80%;
   position: relative;
   z-index: 9;
   padding: 77px 61px 66px;
